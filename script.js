@@ -117,9 +117,9 @@ class Room {
 
     canStart() {
         /**
-         * Game can start with 2+ players
+         * Game can start only when room is full (4 players)
          */
-        return this.players.length >= 2;
+        return this.players.length === MAX_PLAYERS;
     }
 
     dealCards() {
@@ -641,10 +641,12 @@ class GameManager {
             // Update player count
             document.getElementById('playerCount').textContent = room.getPlayerCount();
 
-            // Show start button only for host
+            // Show start button only for host when room is full
             const startBtn = document.getElementById('hostStartBtn');
             if (room.players[this.currentPlayerId].isHost) {
                 startBtn.classList.remove('hidden');
+                // Disable button if room is not full
+                startBtn.disabled = room.getPlayerCount() < MAX_PLAYERS;
             } else {
                 startBtn.classList.add('hidden');
             }
@@ -669,13 +671,25 @@ class GameManager {
          */
         const room = this.currentRoom;
 
+        // Prevent double-start by checking if game is already started
+        if (room.gameStarted) {
+            console.log('Game already started, ignoring duplicate start request');
+            return;
+        }
+
+        // Disable button immediately to prevent double-click
+        const startBtn = document.getElementById('hostStartBtn');
+        if (startBtn) startBtn.disabled = true;
+
         if (!room.players[this.currentPlayerId].isHost) {
             alert('Only the host can start the game');
+            startBtn.disabled = false;
             return;
         }
 
         if (!room.canStart()) {
-            alert('Need at least 2 players to start');
+            alert('Need all 4 players to start the game');
+            startBtn.disabled = false;
             return;
         }
 
@@ -712,6 +726,9 @@ class GameManager {
         .then(data => {
             if (data.error) {
                 alert('Error starting game: ' + data.error);
+                room.gameStarted = false;  // Reset flag on error
+                const startBtn = document.getElementById('hostStartBtn');
+                if (startBtn) startBtn.disabled = false;  // Re-enable button
                 return;
             }
             
@@ -722,6 +739,9 @@ class GameManager {
         .catch(e => {
             console.error('Error starting game:', e);
             alert('Error starting game');
+            room.gameStarted = false;  // Reset flag on error
+            const startBtn = document.getElementById('hostStartBtn');
+            if (startBtn) startBtn.disabled = false;  // Re-enable button
         });
     }
 
