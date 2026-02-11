@@ -1,0 +1,38 @@
+# Dependencies
+node_modules/
+package-lock.json
+npm-debug.log
+yarn-error.log
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Database (ephemeral on Render)
+game.db
+*.db
+*.sqlite
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs
+logs/
+*.log
+
+# Build outputs
+dist/
+build/
+
+# Temp files
+tmp/
+temp/

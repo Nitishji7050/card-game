@@ -1,0 +1,1279 @@
+/* ========================================
+   GLOBAL STYLES
+   ======================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: #6366f1;
+    --secondary-color: #ec4899;
+    --success-color: #22c55e;
+    --danger-color: #ef4444;
+    --dark-bg: #1a1b26;
+    --card-bg: #2d2e3f;
+    --border-color: #404050;
+    --text-primary: #ffffff;
+    --text-secondary: #a0aec0;
+    
+    /* Card colors */
+    --red: #ef4444;
+    --green: #22c55e;
+    --orange: #f97316;
+    --blue: #3b82f6;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, var(--dark-bg) 0%, #0f3460 100%);
+    color: var(--text-primary);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+/* ========================================
+   SCREEN STYLES
+   ======================================== */
+
+.screen {
+    display: none;
+    width: 100%;
+    height: 100vh;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.screen.active {
+    display: flex;
+}
+
+.screen.hidden {
+    display: none !important;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ========================================
+   LOBBY SCREEN
+   ======================================== */
+
+#lobbyScreen {
+    align-items: center;
+    justify-content: center;
+}
+
+.lobby-container {
+    text-align: center;
+    padding: 40px;
+    max-width: 400px;
+    animation: slideUp 0.5s ease-out;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.lobby-container h1 {
+    font-size: 3em;
+    margin-bottom: 10px;
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.subtitle {
+    color: var(--text-secondary);
+    margin-bottom: 40px;
+    font-size: 1.1em;
+}
+
+.lobby-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.input-field {
+    padding: 12px 16px;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    background: var(--card-bg);
+    color: var(--text-primary);
+    font-size: 1em;
+    transition: all 0.3s ease;
+}
+
+.input-field:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 10px rgba(99, 102, 241, 0.3);
+}
+
+.button-group {
+    display: flex;
+    gap: 10px;
+}
+
+.btn {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.btn-primary {
+    background: linear-gradient(45deg, var(--primary-color), #818cf8);
+    color: white;
+    flex: 1;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3);
+}
+
+.btn-primary:active {
+    transform: translateY(0);
+}
+
+.btn-secondary {
+    background: var(--card-bg);
+    color: var(--text-primary);
+    border: 2px solid var(--border-color);
+    flex: 1;
+}
+
+.btn-secondary:hover {
+    border-color: var(--primary-color);
+    transform: translateY(-2px);
+}
+
+.btn-small {
+    padding: 8px 16px;
+    font-size: 0.9em;
+}
+
+/* ========================================
+   DIALOG STYLES
+   ======================================== */
+
+.dialog-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    animation: fadeIn 0.3s ease;
+}
+
+.dialog-overlay.hidden {
+    display: none !important;
+}
+
+.dialog-box {
+    background: var(--card-bg);
+    border: 2px solid var(--border-color);
+    border-radius: 12px;
+    padding: 30px;
+    max-width: 400px;
+    animation: slideUp 0.3s ease-out;
+}
+
+.dialog-box h2 {
+    margin-bottom: 20px;
+}
+
+.dialog-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+/* ========================================
+   WAITING ROOM SCREEN
+   ======================================== */
+
+#waitingRoomScreen {
+    align-items: center;
+    justify-content: center;
+}
+
+.waiting-container {
+    background: var(--card-bg);
+    border: 2px solid var(--border-color);
+    border-radius: 12px;
+    padding: 40px;
+    max-width: 500px;
+    animation: slideUp 0.5s ease-out;
+}
+
+.waiting-container h2 {
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.room-details {
+    background: rgba(99, 102, 241, 0.1);
+    border: 2px solid var(--primary-color);
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 30px;
+}
+
+.room-id-box {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.room-id-box label {
+    font-size: 0.9em;
+    color: var(--text-secondary);
+}
+
+.room-id-display {
+    font-size: 1.8em;
+    font-weight: bold;
+    font-family: 'Courier New', monospace;
+    text-align: center;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 6px;
+    letter-spacing: 3px;
+}
+
+.players-list {
+    margin-bottom: 30px;
+}
+
+.players-list h3 {
+    margin-bottom: 15px;
+}
+
+.players-items {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.player-item {
+    background: rgba(99, 102, 241, 0.1);
+    padding: 12px 16px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border: 1px solid var(--border-color);
+}
+
+.player-item.host {
+    border-color: var(--secondary-color);
+}
+
+.player-badge {
+    background: var(--secondary-color);
+    color: white;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.8em;
+    font-weight: bold;
+}
+
+.waiting-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.waiting-actions .btn {
+    flex: 1;
+}
+
+.info-message {
+    text-align: center;
+    color: var(--text-secondary);
+    margin-top: 20px;
+    font-size: 0.9em;
+}
+
+/* ========================================
+   GAME SCREEN
+   ======================================== */
+
+#gameScreen {
+    flex-direction: column;
+}
+
+.game-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 12px;
+    background: rgba(0, 0, 0, 0.3);
+    border-bottom: 2px solid var(--border-color);
+}
+
+.room-info h2 {
+    font-size: 0.85em;
+    margin-bottom: 1px;
+}
+
+.room-info p {
+    color: var(--text-secondary);
+    font-size: 0.7em;
+}
+
+.game-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+    overflow: hidden;
+}
+
+.table-area {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 4px;
+    position: relative;
+    align-items: center;
+    justify-items: center;
+    padding: 5px;
+}
+
+.player-position {
+    position: relative;
+    width: 85px;
+    height: 85px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Diamond layout: Top, Right, Bottom, Left */
+.player-position.top {
+    grid-column: 2;
+    grid-row: 1;
+}
+
+.player-position.right {
+    grid-column: 3;
+    grid-row: 2;
+}
+
+.player-position.bottom {
+    grid-column: 2;
+    grid-row: 3;
+}
+
+.player-position.left {
+    grid-column: 1;
+    grid-row: 2;
+}
+
+/* Deprecated classes - kept for compatibility */
+.player-position.top-left {
+    display: none;
+}
+
+.player-position.top-right {
+    display: none;
+}
+
+.player-position.bottom-left {
+    display: none;
+}
+
+.player-position.bottom-right {
+    display: none;
+}
+
+.player-slot {
+    text-align: center;
+    padding: 5px;
+    background: var(--card-bg);
+    border: 2px solid var(--border-color);
+    border-radius: 5px;
+    min-width: 85px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+}
+
+.player-slot.hidden {
+    display: none;
+}
+
+.player-slot.active-turn {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 15px rgba(99, 102, 241, 0.5);
+}
+
+.player-name {
+    font-weight: bold;
+    margin-bottom: 3px;
+    color: var(--text-primary);
+    font-size: 0.7em;
+}
+
+.player-cards {
+    display: flex;
+    gap: 2px;
+    justify-content: center;
+    flex-wrap: wrap;
+    min-height: 32px;
+}
+
+.card-back {
+    width: 15px;
+    height: 20px;
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 6px;
+    font-weight: bold;
+}
+
+.center-table {
+    grid-column: 2;
+    grid-row: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.table {
+    width: 100px;
+    height: 100px;
+    background: radial-gradient(ellipse at center, #1a5f3e 0%, #0f3d28 100%);
+    border-radius: 50%;
+    border: 2px solid #2d5a3d;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5), inset 0 2px 5px rgba(255, 255, 255, 0.1);
+    position: relative;
+}
+
+.table::before {
+    content: '';
+    position: absolute;
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.discard-pile {
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 0.65em;
+}
+
+.turn-indicator {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--primary-color);
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.2);
+        opacity: 0.7;
+    }
+}
+
+.your-hand-section {
+    border-top: 2px solid var(--border-color);
+    padding: 8px;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.your-hand-section h3 {
+    margin-bottom: 8px;
+    color: var(--text-secondary);
+    font-size: 0.85em;
+}
+
+.your-hand {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    flex-wrap: wrap;
+    min-height: 105px;
+    align-items: flex-start;
+}
+
+/* ========================================
+   CARD STYLES
+   ======================================== */
+
+.card {
+    width: 60px;
+    height: 85px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    position: relative;
+    font-weight: bold;
+    font-size: 1.5em;
+    transition: all 0.3s ease;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.card:hover:not(.disabled) {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+.card:active:not(.disabled) {
+    transform: translateY(-2px);
+}
+
+.card.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.card.red {
+    background: linear-gradient(135deg, var(--red), #dc2626);
+    color: white;
+}
+
+.card.green {
+    background: linear-gradient(135deg, var(--green), #16a34a);
+    color: white;
+}
+
+.card.orange {
+    background: linear-gradient(135deg, var(--orange), #ea580c);
+    color: white;
+}
+
+.card.blue {
+    background: linear-gradient(135deg, var(--blue), #2563eb);
+    color: white;
+}
+
+/* ========================================
+   CARD ANIMATION
+   ======================================== */
+
+@keyframes cardMove {
+    0% {
+        transform: translateX(0) translateY(0) rotateZ(0);
+    }
+    50% {
+        transform: translateX(var(--tx)) translateY(var(--ty)) rotateZ(10deg);
+    }
+    100% {
+        transform: translateX(calc(var(--tx) * 2)) translateY(calc(var(--ty) * 2)) rotateZ(0);
+    }
+}
+
+@keyframes cardFlip {
+    0% {
+        transform: rotateY(0);
+    }
+    50% {
+        transform: rotateY(90deg);
+    }
+    100% {
+        transform: rotateY(180deg);
+    }
+}
+
+.card.moving {
+    animation: cardMove 1s ease-in-out forwards;
+}
+
+.card.flipping {
+    animation: cardFlip 0.6s ease-in-out forwards;
+}
+
+/* Flying card to table animation */
+.card-flying {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+    pointer-events: none;
+    will-change: transform, left, top, opacity;
+}
+
+/* ========================================
+   GAME FOOTER
+   ======================================== */
+
+.game-footer {
+    padding: 8px 12px;
+    background: rgba(0, 0, 0, 0.3);
+    border-top: 2px solid var(--border-color);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    align-items: center;
+}
+
+.game-message {
+    color: var(--text-secondary);
+    font-size: 0.8em;
+    min-height: 16px;
+}
+
+/* ========================================
+   WINNER SCREEN
+   ======================================== */
+
+#winnerScreen {
+    align-items: center;
+    justify-content: center;
+}
+
+.winner-container {
+    text-align: center;
+    padding: 40px;
+    max-width: 600px;
+}
+
+.winner-animation {
+    animation: winnerPop 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    margin-bottom: 40px;
+}
+
+@keyframes winnerPop {
+    0% {
+        opacity: 0;
+        transform: scale(0.5) rotateZ(-10deg);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) rotateZ(0);
+    }
+}
+
+.winner-animation h1 {
+    font-size: 4em;
+    margin-bottom: 10px;
+    background: linear-gradient(45deg, var(--secondary-color), var(--primary-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.winner-animation p {
+    font-size: 2em;
+    color: var(--secondary-color);
+    margin-bottom: 30px;
+}
+
+.winning-color {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin: 0 auto 40px;
+    box-shadow: 0 0 40px currentColor;
+    animation: colorPulse 1s infinite;
+}
+
+@keyframes colorPulse {
+    0%,
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 40px currentColor;
+    }
+    50% {
+        transform: scale(1.1);
+        box-shadow: 0 0 60px currentColor;
+    }
+}
+
+.winning-cards {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+}
+
+.winning-cards .card {
+    animation: cardBounce 0.6s ease-in-out;
+}
+
+.winning-cards .card:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.winning-cards .card:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.winning-cards .card:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+.winning-cards .card:nth-child(4) {
+    animation-delay: 0.4s;
+}
+
+@keyframes cardBounce {
+    0% {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.winner-message {
+    color: var(--text-secondary);
+    font-size: 1em;
+    margin-bottom: 25px;
+    animation: fadeIn 0.8s ease-in-out 0.5s forwards;
+    opacity: 0;
+}
+
+.btn-exit {
+    font-size: 1.1em !important;
+    padding: 15px 40px !important;
+    min-width: 200px;
+    animation: slideUp 0.5s ease-out 0.7s forwards;
+    opacity: 0;
+}
+
+/* ========================================
+   NOTIFICATION
+   ======================================== */
+
+.notification {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: var(--success-color);
+    color: white;
+    padding: 15px 25px;
+    border-radius: 8px;
+    animation: slideInRight 0.3s ease-out;
+    z-index: 2000;
+}
+
+.notification.hidden {
+    display: none !important;
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(400px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* ========================================
+   RESPONSIVE DESIGN
+   ======================================== */
+
+@media (max-width: 1024px) {
+    .table-area {
+        gap: 20px;
+    }
+
+    .player-position {
+        width: 120px;
+        height: 120px;
+    }
+
+    .table {
+        width: 150px;
+        height: 150px;
+    }
+
+    .card {
+        width: 80px;
+        height: 110px;
+        font-size: 1.5em;
+    }
+}
+
+@media (max-width: 768px) {
+    .game-container {
+        padding: 10px;
+    }
+
+    .table-area {
+        gap: 15px;
+    }
+
+    .player-position {
+        width: 100px;
+        height: 100px;
+        margin: 20px !important;
+    }
+
+    .player-slot {
+        min-width: 100px;
+        padding: 10px;
+    }
+
+    .player-name {
+        font-size: 0.8em;
+    }
+
+    .card {
+        width: 70px;
+        height: 100px;
+        font-size: 1.2em;
+    }
+
+    .your-hand {
+        gap: 10px;
+    }
+
+    .table {
+        width: 120px;
+        height: 120px;
+    }
+
+    .button-group {
+        flex-direction: column;
+    }
+
+    .winning-color {
+        width: 100px;
+        height: 100px;
+    }
+}
+
+/* ========================================
+   MOBILE OPTIMIZATIONS (< 480px)
+   ======================================== */
+
+@media (max-width: 480px) {
+    body {
+        overflow-y: auto;
+        padding: 0;
+    }
+
+    .screen {
+        height: 100%;
+        min-height: 100vh;
+    }
+
+    /* Lobby Screen */
+    .lobby-container {
+        padding: 20px;
+        max-width: 100%;
+        width: 100%;
+    }
+
+    .lobby-container h1 {
+        font-size: 2em;
+        margin-bottom: 5px;
+    }
+
+    .subtitle {
+        font-size: 0.9em;
+    }
+
+    .input-field {
+        padding: 12px;
+        font-size: 16px !important; /* Prevents zoom on iOS */
+        width: 100%;
+    }
+
+    .btn {
+        padding: 12px 20px;
+        font-size: 16px;
+        min-height: 44px; /* Touch target minimum */
+        width: 100%;
+    }
+
+    .button-group {
+        flex-direction: column;
+        gap: 10px;
+        width: 100%;
+    }
+
+    /* Waiting Room */
+    .waiting-container {
+        padding: 15px;
+        max-width: 100%;
+        width: 100%;
+        border-radius: 0;
+    }
+
+    .room-id-display {
+        font-size: 1.5em;
+        letter-spacing: 2px;
+    }
+
+    .players-list {
+        margin-bottom: 20px;
+    }
+
+    .player-item {
+        padding: 10px;
+        font-size: 0.9em;
+    }
+
+    /* Game Screen */
+    #gameScreen {
+        flex-direction: column;
+    }
+
+    .game-header {
+        padding: 10px;
+    }
+
+    #roomTitle {
+        font-size: 1.2em;
+    }
+
+    #currentPlayerTurn {
+        font-size: 0.9em;
+    }
+
+    .game-container {
+        flex: 1;
+        padding: 5px;
+    }
+
+    .table-area {
+        gap: 8px;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(3, 1fr);
+        max-width: 100%;
+        max-height: 50vh;
+    }
+
+    .player-position {
+        margin: 10px !important;
+        width: 70px;
+        height: 70px;
+    }
+
+    .player-slot {
+        min-width: 70px;
+        padding: 5px;
+    }
+
+    .player-name {
+        font-size: 0.7em;
+    }
+
+    .player-cards {
+        gap: 2px;
+    }
+
+    .player-card {
+        width: 12px;
+        height: 18px;
+        font-size: 0.6em;
+    }
+
+    .card {
+        width: 50px;
+        height: 70px;
+        font-size: 1em;
+        cursor: pointer;
+        touch-action: manipulation; /* Prevent double-tap zoom */
+        user-select: none;
+        -webkit-user-select: none;
+        -webkit-touch-callout: none;
+    }
+
+    .card:active {
+        transform: scale(0.95);
+    }
+
+    .table {
+        width: 80px;
+        height: 80px;
+        font-size: 1.2em;
+    }
+
+    .center-table {
+        gap: 5px;
+    }
+
+    .turn-indicator {
+        width: 20px;
+        height: 20px;
+    }
+
+    .your-hand-section {
+        padding: 10px;
+        flex: 0 0 auto;
+        max-height: 35vh;
+        overflow-y: auto;
+    }
+
+    .your-hand-section h3 {
+        font-size: 0.9em;
+        margin-bottom: 5px;
+    }
+
+    .your-hand {
+        gap: 8px;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    /* Game Footer */
+    .game-footer {
+        padding: 8px;
+        gap: 3px;
+    }
+
+    .game-message {
+        font-size: 0.75em;
+        min-height: 14px;
+    }
+
+    #startGameBtn {
+        width: 100%;
+    }
+
+    /* Winner Screen */
+    #winnerScreen {
+        padding: 20px;
+    }
+
+    .winner-container {
+        padding: 15px;
+        max-width: 100%;
+        width: 100%;
+    }
+
+    .winner-animation h1 {
+        font-size: 1.8em;
+    }
+
+    .winner-animation p {
+        font-size: 1.2em;
+    }
+
+    .winning-color {
+        width: 60px;
+        height: 60px;
+        margin: 10px auto;
+    }
+
+    .winning-cards {
+        gap: 8px;
+        margin: 15px 0;
+    }
+
+    .winning-cards .card {
+        width: 60px;
+        height: 85px;
+    }
+
+    .winner-message {
+        font-size: 0.9em;
+    }
+
+    .btn-exit {
+        width: 100%;
+        min-height: 50px;
+        font-size: 16px;
+    }
+
+    /* Dialog */
+    .dialog-overlay {
+        padding: 20px;
+    }
+
+    .dialog-box {
+        padding: 20px;
+        max-width: 100%;
+        width: 100%;
+    }
+
+    .dialog-buttons {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .dialog-buttons .btn {
+        width: 100%;
+    }
+}
+
+/* ========================================
+   SMALL PHONES (< 360px)
+   ======================================== */
+
+@media (max-width: 360px) {
+    .lobby-container {
+        padding: 10px;
+    }
+
+    .lobby-container h1 {
+        font-size: 1.5em;
+    }
+
+    .btn {
+        font-size: 14px;
+        padding: 10px 15px;
+    }
+
+    .card {
+        width: 40px;
+        height: 56px;
+        font-size: 0.8em;
+    }
+
+    .player-position {
+        width: 50px;
+        height: 50px;
+        margin: 5px !important;
+    }
+
+    .table {
+        width: 60px;
+        height: 60px;
+        font-size: 1em;
+    }
+
+    .your-hand-section {
+        max-height: 30vh;
+    }
+
+    .winner-container {
+        padding: 10px;
+    }
+
+    .winner-animation h1 {
+        font-size: 1.5em;
+    }
+
+    .winning-cards .card {
+        width: 45px;
+        height: 64px;
+    }
+}
+
+/* ========================================
+   LANDSCAPE MODE
+   ======================================== */
+
+@media (max-height: 600px) and (orientation: landscape) {
+    .screen {
+        height: 100vh;
+    }
+
+    .game-container {
+        max-height: 70vh;
+    }
+
+    .your-hand-section {
+        max-height: 25vh;
+    }
+
+    .table-area {
+        max-height: 60vh;
+    }
+
+    .card {
+        width: 45px;
+        height: 64px;
+        font-size: 0.9em;
+    }
+
+    .player-position {
+        width: 60px;
+        height: 60px;
+    }
+
+    .table {
+        width: 70px;
+        height: 70px;
+    }
+}
+
+/* ========================================
+   TOUCH-FRIENDLY IMPROVEMENTS
+   ======================================== */
+
+@media (hover: none) and (pointer: coarse) {
+    /* Touch devices */
+    .card {
+        border: 2px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .card:active {
+        border-color: rgba(255, 255, 255, 0.8);
+        transform: scale(0.95);
+    }
+
+    .btn:active {
+        transform: scale(0.98);
+    }
+
+    /* Larger hit targets */
+    .btn {
+        min-height: 44px;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+        min-height: 44px;
+        padding: 12px;
+    }
+}
+

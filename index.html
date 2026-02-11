@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no, maximum-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#1a1a1a">
+    <title>Multiplayer Card Game</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- LOBBY SCREEN -->
+    <div id="lobbyScreen" class="screen active">
+        <div class="lobby-container">
+            <h1>Card Game</h1>
+            <p class="subtitle">A multiplayer room-based card game</p>
+            
+            <div class="lobby-form">
+                <input 
+                    type="text" 
+                    id="playerNameInput" 
+                    placeholder="Enter your name" 
+                    class="input-field"
+                    maxlength="20"
+                >
+                
+                <div class="button-group">
+                    <button class="btn btn-primary" onclick="game.createRoom()">
+                        Create Room
+                    </button>
+                    <button class="btn btn-secondary" onclick="game.openJoinDialog()">
+                        Join Room
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JOIN ROOM DIALOG -->
+    <div id="joinDialog" class="dialog-overlay hidden">
+        <div class="dialog-box">
+            <h2>Join a Room</h2>
+            <input 
+                type="text" 
+                id="roomIdInput" 
+                placeholder="Enter Room ID" 
+                class="input-field"
+                maxlength="6"
+            >
+            <div class="dialog-buttons">
+                <button class="btn btn-primary" onclick="game.joinRoom()">Join</button>
+                <button class="btn btn-secondary" onclick="game.closeJoinDialog()">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- GAME SCREEN -->
+    <div id="gameScreen" class="screen hidden">
+        <!-- Room Info -->
+        <div class="game-header">
+            <div class="room-info">
+                <h2 id="roomTitle">Room: </h2>
+                <p id="currentPlayerTurn">Current Turn: </p>
+            </div>
+            <button class="btn btn-small" onclick="game.leaveGame()">Leave Game</button>
+        </div>
+
+        <!-- Main Game Area -->
+        <div class="game-container">
+            <!-- Table with Players -->
+            <div class="table-area">
+                <!-- TOP PLAYER -->
+                <div class="player-position top">
+                    <div id="playerPos-top" class="player-slot hidden">
+                        <div class="player-name" id="playerPos-top-name"></div>
+                        <div class="player-cards" id="playerPos-top-cards"></div>
+                    </div>
+                </div>
+
+                <!-- RIGHT PLAYER -->
+                <div class="player-position right">
+                    <div id="playerPos-right" class="player-slot hidden">
+                        <div class="player-name" id="playerPos-right-name"></div>
+                        <div class="player-cards" id="playerPos-right-cards"></div>
+                    </div>
+                </div>
+
+                <!-- CENTER TABLE -->
+                <div class="center-table">
+                    <div class="table">
+                        <div class="discard-pile" id="discardPile">
+                            <p>Table</p>
+                        </div>
+                    </div>
+                    <div class="turn-indicator" id="turnIndicator"></div>
+                </div>
+
+                <!-- LEFT PLAYER -->
+                <div class="player-position left">
+                    <div id="playerPos-left" class="player-slot hidden">
+                        <div class="player-name" id="playerPos-left-name"></div>
+                        <div class="player-cards" id="playerPos-left-cards"></div>
+                    </div>
+                </div>
+
+                <!-- BOTTOM PLAYER -->
+                <div class="player-position bottom">
+                    <div id="playerPos-bottom" class="player-slot hidden">
+                        <div class="player-name" id="playerPos-bottom-name"></div>
+                        <div class="player-cards" id="playerPos-bottom-cards"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Your Hand -->
+            <div class="your-hand-section">
+                <h3>Your Cards</h3>
+                <div class="your-hand" id="yourHand"></div>
+            </div>
+        </div>
+
+        <!-- Game Controls -->
+        <div class="game-footer">
+            <div id="gameMessage" class="game-message"></div>
+            <button id="startGameBtn" class="btn btn-primary hidden" onclick="game.startGame()">
+                Start Game
+            </button>
+        </div>
+    </div>
+
+    <!-- WAITING ROOM SCREEN -->
+    <div id="waitingRoomScreen" class="screen hidden">
+        <div class="waiting-container">
+            <h2>Waiting Room</h2>
+            
+            <div class="room-details">
+                <div class="room-id-box">
+                    <label>Room ID:</label>
+                    <div class="room-id-display" id="roomIdDisplay"></div>
+                    <button class="btn btn-small" onclick="game.copyRoomId()">Copy ID</button>
+                </div>
+            </div>
+
+            <div class="players-list">
+                <h3>Players (<span id="playerCount">0</span>/4)</h3>
+                <div id="playersList" class="players-items"></div>
+            </div>
+
+            <div class="waiting-actions">
+                <button id="hostStartBtn" class="btn btn-primary hidden" onclick="game.startGame()">
+                    Start Game
+                </button>
+                <button class="btn btn-secondary" onclick="game.leaveGame()">
+                    Leave
+                </button>
+            </div>
+
+            <p id="waitingMessage" class="info-message">Waiting for host to start the game...</p>
+        </div>
+    </div>
+
+    <!-- WINNER SCREEN -->
+    <div id="winnerScreen" class="screen hidden">
+        <div class="winner-container">
+            <div class="winner-animation">
+                <h1 id="winnerName">Player Name</h1>
+                <p>WINS!</p>
+                <div class="winning-color" id="winningColor"></div>
+            </div>
+            <div class="winning-cards" id="winningCards"></div>
+            <p class="winner-message">Collected 4 cards of the same color!</p>
+            <button class="btn btn-primary btn-exit" onclick="game.backToLobby()">Exit to Lobby</button>
+        </div>
+    </div>
+
+    <!-- COPY NOTIFICATION -->
+    <div id="copyNotification" class="notification hidden">Copied to clipboard!</div>
+
+    <script src="script.js"></script>
+</body>
+</html>
